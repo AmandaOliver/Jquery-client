@@ -1,34 +1,53 @@
+/**
+ * Método que obtiene todos los estudiantes y los muestra
+ */
 function getAll(){
 	$.ajax({
 		type: "GET",
+		//va a devolver el contenido en un Json
 		dataType: "json",
-		url: "http://localhost:8080/WebRestServer//TFG/all",
+		//url de nuestro servicio web
+		url: "http://localhost:8080/WebRestServer/TFG/all",
+		crossDomain : true ,
+		//esto se hará en caso de que el servicio web funcione
 		success: function(data){
-		var myStudient="Proyectos Almacenados:";
-		for (var i=0; i<data.length; i++) {
-	      myStudient += "<br>&nbsp&nbsp Alumno: "+data[i].nombreAlumno+" "+ data[i].apellidosAlumno+
-	      "<br>&nbsp&nbsp Tema: "+ data[i].temaProyecto+"<br>&nbsp&nbsp Tutores: "+
-	      data[i].listaTutores+"<br>&nbsp&nbsp Estado: "+data[i].estado+
-	      "<br>&nbsp&nbsp Fecha de presentacion: "+data[i].fechaPresentacion+
-	      "<br>&nbsp&nbsp Calificacion: "+data[i].calificacion+"<br>";
-	    }
-		$("#Proyecto").html(myStudient);},
+			var html ="Estudiantes";
+			//bucle que recorre todos los elementos del json 
+			$.each(data, function(i,item){		
+				html+='<ul>'
+					+'<li> Nombre del estudiante: ' + item.nombre + ' ' + item.apellido1 + ' ' + item.apellido2 + '</li>'
+					+'<li> Tema del TFG: '+item.tema+'</li>'
+					+'<li> Director del TFG: '+item.tutor1+'</li>';
+					if(item.tutor2!="null") html+='<li> Co-director del TFG: '+item.tutor2+'</li>';
+					html+='<li> Estado del TFG: '+item.estado+'</li>'
+					if(item.estado=="PRESENTADO"){
+						html+='<li> Fecha de presentación: '+item.fechaPresentacion+'</li>'
+						+'<li> Calificación: '+item.calificacion+'</li>';
+					}
+					html+='</ul><br><br>';
+			});
+			//se pasa el contenido a la vista
+			$("#contenido").html(html);
+		},		
+		//esto se hará en caso de que el servicio web falle
 		error:function(res){
-		alert("ERROR "+ res.statusText); }
+			$('#contenido').html("ERROR "+ res.statusText); 
+		}
 	});
 }
 
-function getEstudiante(myId){
-	var myUrl =
-	"http://localhost:8080/WebRestServer//TFG/estudiante/"
-	+ myId;
+function getEstudiante(){
+	var estudiante = $('#apellidos').val();
+	estudiante = estudiante.replace(/\s+/g, '');
 	$.ajax({
-	type: "GET",
-	url: myUrl,
-	success: function(data){
-	$("#Proyecto").html(data); },
-	error:function(res){
-	alert("ERROR "+ res.statusText); }
+		type: "GET",
+		url: "http://localhost:8080/WebRestServer/TFG/estudiante/"+estudiante,
+		success: function(data){
+			$("#contenido").html(data); 
+		},
+		error:function(res){
+			$("#contenido").html("ERROR "+ res.statusText);
+		}
 	});
 }
 

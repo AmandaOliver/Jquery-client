@@ -1,20 +1,27 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<script type="text/javascript" src="js/jquery-2.1.4.js"></script>
-<script type="text/javascript" src="js/wsinvocationREST.js"></script>
-<title>Proyectos</title>
-</head>
-<body bgcolor="green">
-<div align="center">
-<input type="button" value="GET Estudiante" onclick="getEstudiante('SánchezRoldán')"/>
-<input type="button" value="GET JSON Estudiante" onclick="getAll()"/>
+<html lang="es">
+	<head>
+		<meta charset="utf-8">
+		<meta name='description' content='Sitio Web Cliente'>
+		<meta name='viewport' content='width=device-width, initial-scale=1'>
+		<title>Cliente</title>
+		<script type="text/javascript" src="js/jquery-2.1.4.js"></script>
+		<script type="text/javascript" src="js/wsinvocationREST.js"></script>
+	</head>
+	<body bgcolor="green">
+		<section>
+			<div>
+				<p id='contenido'></p>
+			</div>
+			Apellidos Alumno: <input type='text' id='apellidos'><br>
+			<button onClick='getAll()'>Obtener todos los estudiantes</button>
+			<button onClick='getEstudiante()'>Obtener un estudiante</button>
+		</section>
+<!--<input type="button" value="GET Estudiante" onclick="getEstudiante('SÃ¡nchezRoldÃ¡n')"/>
 <input type="button" value="Update" onclick="updateEstudiante()"/>
 <input type="button" value="POST JSON Estudiante" onclick="postJSON()"/>
 <input type="button" value="POST Form Estudiante" onclick="postForm()"/>
-<input type="button" value="DELETE Estudiante" onclick="deleteJSON('SánchezRoldán')"/>
-</div>
-<h3 id="Proyecto"></h3>
+<input type="button" value="DELETE Estudiante" onclick="deleteJSON('SÃ¡nchezRoldÃ¡n')"/>
+-->
 </body>
 </html>
