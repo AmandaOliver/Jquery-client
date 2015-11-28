@@ -19,7 +19,7 @@
 				<h4>Introduzca los apellidos y pulse el botón para obtener los datos del estudiante deseado</h4>
 				<pre><p id='contenido2'></p></pre>
 				Apellidos: <input type='text' id='apellidos'><br><br>
-				<button onClick='getEstudiante()'>Obtener un estudiante</button>
+				<button onClick='getEstudiante()'>Obtener el estudiante</button>
 			</div><br><br>
 			<div>				
 				<h4>Introduzca los apellidos y los datos que desea modificar del estudiante</h4>
@@ -30,7 +30,7 @@
 				Fecha de presentación: <input type='date' id="fecha"><br>
 				Calificación: <input type='number' id='calificacion'><br><br>
 				<button onClick='modificarEstudiante()'>Modificar los datos</button>
-			</div>
+			</div><br><br>
 			<div>
 				<h4>Introduzca los datos del estudiante que desea añadir(transformando el formulario a JSON)</h4>
 				<pre><p id="contenido4"></p></pre>
@@ -44,8 +44,8 @@
 				Fecha de presentación: <input type='date' id='fecha_nuevo'><br>
 				Calificación: <input type='number' id='calificacion_nuevo'><br><br>
 				<button onClick='nuevoEstudianteJSON()'>Añadir el estudiante</button>				
-			</div>
-				<div>
+			</div><br><br>
+			<div>
 				<h4>Introduzca los datos del estudiante que desea añadir</h4>
 				<pre><p id="contenido5"></p></pre>
 				<form id="form">
@@ -60,7 +60,14 @@
 					Calificación: <input type='number' id='calificacion_nuevo'><br><br>
 					<button type="submit" onClick='nuevoEstudianteFORM()'>Añadir el estudiante</button>		
 				</form>		
-			</div>
+			</div><br><br>
+			<div>				
+				<h4>Introduzca los apellidos y pulse el botón para borrar el estudiante deseado</h4>
+				<pre><p id='contenido6'></p></pre>
+				Apellidos: <input type='text' id='apellidos_borrar'><br><br>
+				<button onClick='borrarEstudiante()'>Borrar el estudiante</button>
+			</div><br><br>
+			
 		</section>
 <!--
 

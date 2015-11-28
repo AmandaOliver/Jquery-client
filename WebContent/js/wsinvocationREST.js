@@ -153,17 +153,23 @@ function nuevoEstudianteJSON(){
 	$("#form").submit(); //Submit  the FORM
 	
 }
-function deleteJSON(alumno){
+function borrarEstudiante(alumno){
+	//Nos traemos los datos del formulario
+	var apellidos = $("#apellidos_borrar").val();
+	//eliminamos los espacios de los apellidos
+	apellidos = apellidos.replace(/\s+/g, '');
 	$.ajax( {
-	type:"DELETE",
-	url:"http://localhost:8080/WebRestServer//TFG/delete/"
-	+alumno,
-	contentType:"application/json",
-	dataType:"json",
-	success:function(data){
-	$("#Proyecto").html(data); },
-	error:function(res){
-	alert("ERROR "+ res.statusText); }
+		type:"DELETE",
+		url:"http://localhost:8080/WebRestServer//TFG/delete/"+apellidos,
+		contentType:"application/json",
+		dataType:"json",
+		success:function(data){
+			var html="Estudiante eliminado";
+			$("#contenido6").html(html);
+		},
+		error:function(res){
+			alert("ERROR "+ res.statusText); 
+		}
 	});
 }
 
