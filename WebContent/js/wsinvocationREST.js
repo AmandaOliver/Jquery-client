@@ -56,6 +56,35 @@ function getEstudiante(){
 	});
 }
 
+/**
+ * Método que permite modificar el tema, estado fecha de presentación y calificación
+ *  de un TFG de un alumno, pasándole los nuevos datos mediante un formulario html
+ */
+function modificarEstudiante(){
+	//nos traemos los datos del formulario
+	var estudiante = $("#apellidos2").val();
+	//eliminamos los espacios de los apellidos
+	estudiante = estudiante.replace(/\s+/g, '');
+	var tema = $("#tema").val();
+	var estado = $("#estado").val();
+	var fecha = $("#fecha").val();
+	var calificacion = $("#calificacion").val();
+	$.ajax({
+		type:"PUT",
+		url:"http://localhost:8080/WebRestServer/TFG/update/"+estudiante,
+		contentType:"application/json",
+		dataType:"text",
+		//pasamos una cadena a JSON que es lo que nuestro servicio web nos pide
+		data:JSON.stringify( {"tema": tema,"estado": estado, "fechaPresentacion":fecha,"calificacion": calificacion}),
+	    success: function(data){
+	    	var html="Estudiante actualizado";
+	    	$("#contenido3").html(html);
+	    },
+	    error:function(res){
+	    	$("#contenido3").html("ERROR "+ res.statusText);
+	    }
+	});
+}
 function postJSON(){
 	var estudiante = $("#estudiante").val();
 	var estnombre = $("#estnombre").val();
@@ -116,27 +145,7 @@ function postForm(){
 	});
 }
 
-function modificarEstudiante(){
-	var estudiante = $("#apellidos2").val();
-	estudiante = estudiante.replace(/\s+/g, '');
-	var tema = $("#tema").val();
-	var estado = $("#estado").val();
-	var fecha = $("#fecha").val();
-	var calificacion = $("#calificacion").val();
-	$.ajax({
-		type:"PUT",
-		url:"http://localhost:8080/WebRestServer/TFG/update/"+estudiante,
-		contentType:"application/json",
-		dataType:"text",
-		data:JSON.stringify( {"tema": tema,"estado": estado, "fechaPresentacion":fecha,"calificacion": calificacion}),
-	    success: function(data){
-	    	var html="Estudiante actualizado";
-	    	$("#contenido3").html(html);
-	    },
-	    error:function(res){
-	    	alert("ERROR "+ res.statusText); }
-	});
-}
+
 
 function deleteJSON(alumno){
 	$.ajax( {
