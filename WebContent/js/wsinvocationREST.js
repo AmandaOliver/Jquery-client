@@ -41,7 +41,7 @@ function getAll(){
 function getEstudiante(){
 	//obtenemos los apellidos del estudiante que se desea mostrar, 
 	//estos se han introducido en un formulario del html
-	var estudiante = $('#apellidos').val();
+	var estudiante = $('#apellidos_estudiante').val();
 	//Quitamos los espacios
 	estudiante = estudiante.replace(/\s+/g, '');
 	$.ajax({
@@ -62,13 +62,13 @@ function getEstudiante(){
  */
 function modificarEstudiante(){
 	//nos traemos los datos del formulario
-	var estudiante = $("#apellidos2").val();
+	var estudiante = $("#apellidos2_modificar").val();
 	//eliminamos los espacios de los apellidos
 	estudiante = estudiante.replace(/\s+/g, '');
-	var tema = $("#tema").val();
-	var estado = $("#estado").val();
-	var fecha = $("#fecha").val();
-	var calificacion = $("#calificacion").val();
+	var tema = $("#tema_modificar").val();
+	var estado = $("#estado_modificar").val();
+	var fecha = $("#fecha_modificar").val();
+	var calificacion = $("#calificacion_modificar").val();
 	$.ajax({
 		type:"PUT",
 		url:"http://localhost:8080/WebRestServer/TFG/update/"+estudiante,
@@ -125,32 +125,30 @@ function nuevoEstudianteJSON(){
  * Método que permite añadir un nuevo estudiante pasándole 
  * los datos mediante un formulario html
  */
-function nuevoEstudianteJSON(){
-	
-	$("#form").submit(function(e)
-	{
-	    var postData = $(this).serializeArray();
-	    var formURL = $(this).attr("action");
-	    $.ajax(
-	    {
-	        url : "http://localhost:8080/WebRestServer/TFG/addEstudianteForm",
-	        type: "POST",
-	        data : postData,
-	        success:function(data, textStatus, jqXHR) 
-	        {
-	        	var html="Estudiante añadido";
-		    	$('#contenido4').html(html);
-	        },
-	        error: function(jqXHR, textStatus, errorThrown) 
-	        {
-	        	alert("ERROR "+ res.statusText); 
-	        }
-	    });
-	    e.preventDefault(); //STOP default action
-	    e.unbind(); //unbind. to stop multiple form submit.
+function nuevoEstudianteFORM(){
+	//Nos traemos los datos del formulario
+	var nombre = $("#nombre").val();
+	var apellido1 = $("#apellido1").val();
+	var apellido2 = $("#apellido2").val();	
+	var tema = $("#tema").val();
+	var tutor1 = $("#director").val();
+    var tutor2 = $("#co-director").val();	
+	var estado = $("#estado").val();
+	var fecha = $("#fecha").val();
+	var calificacion = $("#calificacion").val();
+	$.ajax( {
+		type:"POST",
+		url:"http://localhost:8080/WebRestServer/TFG/addEstudianteForm",
+		contentType:"application/x-www-form-urlencoded",
+		dataType:"text",
+	    success:function(data){
+	    	var html="Estudiante añadido";
+	    	$('#contenido5').html(data);
+	    },
+	    error:function(res){
+	    	alert("ERROR "+ res.statusText); }
 	});
-	 
-	$("#form").submit(); //Submit  the FORM
+	
 	
 }
 function borrarEstudiante(alumno){
@@ -164,8 +162,8 @@ function borrarEstudiante(alumno){
 		contentType:"application/json",
 		dataType:"json",
 		success:function(data){
-			var html="Estudiante eliminado";
-			$("#contenido6").html(html);
+			var html="Estudiante borrado";
+			$("#contenido6").html(data);
 		},
 		error:function(res){
 			alert("ERROR "+ res.statusText); 

@@ -18,17 +18,17 @@
 			<div>				
 				<h4>Introduzca los apellidos y pulse el botón para obtener los datos del estudiante deseado</h4>
 				<pre><p id='contenido2'></p></pre>
-				Apellidos: <input type='text' id='apellidos'><br><br>
+				Apellidos: <input type='text' id='apellidos_estudiante'><br><br>
 				<button onClick='getEstudiante()'>Obtener el estudiante</button>
 			</div><br><br>
 			<div>				
 				<h4>Introduzca los apellidos y los datos que desea modificar del estudiante</h4>
 				<pre><p id='contenido3'></p></pre>
-				Apellidos: <input type='text' id='apellidos2'><br>
-				Tema del TFG: <input type='text' id='tema'><br>
-				Estado: <input type='text' id='estado'><br>
-				Fecha de presentación: <input type='date' id="fecha"><br>
-				Calificación: <input type='number' id='calificacion'><br><br>
+				Apellidos: <input type='text' id='apellidos2_modificar'><br>
+				Tema del TFG: <input type='text' id='tema_modificar'><br>
+				Estado: <input type='text' id='estado_modificar'><br>
+				Fecha de presentación: <input type='date' id="fecha_modificar"><br>
+				Calificación: <input type='number' id='calificacion_modificar'><br><br>
 				<button onClick='modificarEstudiante()'>Modificar los datos</button>
 			</div><br><br>
 			<div>
@@ -48,18 +48,18 @@
 			<div>
 				<h4>Introduzca los datos del estudiante que desea añadir</h4>
 				<pre><p id="contenido5"></p></pre>
-				<form id="form">
-					Nombre: <input type='text' id='nombre_nuevo'><br>
-					Primer apellido: <input type='text' id='apellido1_nuevo'><br>
-					Segundo apellido: <input type='text' id='apellido2_nuevo'><br>
-					Tema del TFG: <input type='text' id='tema_nuevo'><br>
-					Director del TFG: <input type='text' id='director_nuevo'><br>
-					Co-director del TFG: <input type='text' id='co-director_nuevo'><br>
-					Estado del TFG: <input type='text' id='estado_nuevo'><br>
-					Fecha de presentación: <input type='date' id='fecha_nuevo'><br>
-					Calificación: <input type='number' id='calificacion_nuevo'><br><br>
-					<button type="submit" onClick='nuevoEstudianteFORM()'>Añadir el estudiante</button>		
-				</form>		
+				
+					Nombre: <input type='text' id='nombre'><br>
+					Primer apellido: <input type='text' id='apellido1'><br>
+					Segundo apellido: <input type='text' id='apellido2'><br>
+					Tema del TFG: <input type='text' id='tema'><br>
+					Director del TFG: <input type='text' id='tutor1'><br>
+					Co-director del TFG: <input type='text' id='tutor2'><br>
+					Estado del TFG: <input type='text' id='estado'><br>
+					Fecha de presentación: <input type='date' id='fechaPresentacion'><br>
+					Calificación: <input type='number' id='calificacion'><br><br>
+					<button  onClick='nuevoEstudianteFORM()'>Añadir el estudiante</button>	
+					
 			</div><br><br>
 			<div>				
 				<h4>Introduzca los apellidos y pulse el botón para borrar el estudiante deseado</h4>
@@ -67,11 +67,7 @@
 				Apellidos: <input type='text' id='apellidos_borrar'><br><br>
 				<button onClick='borrarEstudiante()'>Borrar el estudiante</button>
 			</div><br><br>
-			
-		</section>
-<!--
 
-<input type="button" value="DELETE Estudiante" onclick="deleteJSON('SánchezRoldán')"/>
--->
+		</section>
 </body>
 </html>
