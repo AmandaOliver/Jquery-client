@@ -10,14 +10,29 @@
 	</head>
 	<body bgcolor="green">
 		<section>
-			<div>
-				<p id='contenido'></p>
+			<div>						
+				<h4>Pulse el botón para obtener una lista con todos los estudiantes registrados</h4>
+				<pre><p id='contenido'></p></pre>	
+				<button onClick='getAll()'>Obtener todos los estudiantes</button>			
+			</div><br><br>
+			<div>				
+				<h4>Introduzca los apellidos y pulse el botón para obtener los datos del estudiante deseado</h4>
+				<pre><p id='contenido2'></p></pre>
+				Apellidos: <input type='text' id='apellidos'><br><br>
+				<button onClick='getEstudiante()'>Obtener un estudiante</button>
+			</div><br><br>
+			<div>				
+				<h4>Introduzca los apellidos y los datos que desea modificar del estudiante</h4>
+				<pre><p id='contenido3'></p></pre>
+				Apellidos: <input type='text' id='apellidos2'><br>
+				Tema del TFG: <input type='text' id='tema'><br>
+				Estado: <input type='text' id='estado'><br>
+				Fecha de presentación: <input type='date' id="fecha"><br>
+				Calificación: <input type='number' id='calificacion'><br><br>
+				<button onClick='modificarEstudiante()'>Modificar los datos</button>
 			</div>
-			Apellidos Alumno: <input type='text' id='apellidos'><br>
-			<button onClick='getAll()'>Obtener todos los estudiantes</button>
-			<button onClick='getEstudiante()'>Obtener un estudiante</button>
 		</section>
-<!--<input type="button" value="GET Estudiante" onclick="getEstudiante('SánchezRoldán')"/>
+<!--
 <input type="button" value="Update" onclick="updateEstudiante()"/>
 <input type="button" value="POST JSON Estudiante" onclick="postJSON()"/>
 <input type="button" value="POST Form Estudiante" onclick="postForm()"/>

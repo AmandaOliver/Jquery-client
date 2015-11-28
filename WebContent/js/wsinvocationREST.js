@@ -11,7 +11,7 @@ function getAll(){
 		crossDomain : true ,
 		//esto se hará en caso de que el servicio web funcione
 		success: function(data){
-			var html ="Estudiantes";
+			var html ="";
 			//bucle que recorre todos los elementos del json 
 			$.each(data, function(i,item){		
 				html+='<ul>'
@@ -35,18 +35,23 @@ function getAll(){
 		}
 	});
 }
-
+/**
+ * Método que obtiene un estudiante y muestra sus datos
+ */
 function getEstudiante(){
+	//obtenemos los apellidos del estudiante que se desea mostrar, 
+	//estos se han introducido en un formulario del html
 	var estudiante = $('#apellidos').val();
+	//Quitamos los espacios
 	estudiante = estudiante.replace(/\s+/g, '');
 	$.ajax({
 		type: "GET",
 		url: "http://localhost:8080/WebRestServer/TFG/estudiante/"+estudiante,
 		success: function(data){
-			$("#contenido").html(data); 
+			$("#contenido2").html(data); 
 		},
 		error:function(res){
-			$("#contenido").html("ERROR "+ res.statusText);
+			$("#contenido2").html("ERROR "+ res.statusText);
 		}
 	});
 }
@@ -111,28 +116,25 @@ function postForm(){
 	});
 }
 
-function updateEstudiante(){
-	var estudiante = $("#estudiante").val();
-	var estnombre = $("#estnombre").val();
-	var estapellidos = $("#estapellidos").val();
-	var esttema = $("#esttema").val();
-	var esttutores = $("#esttutores").val();
-	var estestado = $("#estestado").val();
-	var estfecha = $("#estfecha").val();
-	var estcalificacion = $("#estcalificacion").val();
+function modificarEstudiante(){
+	var estudiante = $("#apellidos2").val();
+	estudiante = estudiante.replace(/\s+/g, '');
+	var tema = $("#tema").val();
+	var estado = $("#estado").val();
+	var fecha = $("#fecha").val();
+	var calificacion = $("#calificacion").val();
 	$.ajax({
-	type:"PUT",
-	url:"http://localhost:8080/WebRestServer//TFG/addEstudiante/"+estudiante,
-	contentType:"application/json",
-	dataType:"json",
-	data:JSON.stringify( {"nombreAlumno":estnombre,"apellidosAlumno":estapellidos,
-	      "temaProyecto": esttema, "listaTutores": esttutores,
-	      "estado": estestado, "fechaPresentacion":estfecha,
-	      "calificacion": estcalificacion}),
-	success: function(data){
-	$("#Proyecto").html(data); },
-	error:function(res){
-	alert("ERROR "+ res.statusText); }
+		type:"PUT",
+		url:"http://localhost:8080/WebRestServer/TFG/update/"+estudiante,
+		contentType:"application/json",
+		dataType:"text",
+		data:JSON.stringify( {"tema": tema,"estado": estado, "fechaPresentacion":fecha,"calificacion": calificacion}),
+	    success: function(data){
+	    	var html="Estudiante actualizado";
+	    	$("#contenido3").html(html);
+	    },
+	    error:function(res){
+	    	alert("ERROR "+ res.statusText); }
 	});
 }
 
