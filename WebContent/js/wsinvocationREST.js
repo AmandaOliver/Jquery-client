@@ -31,7 +31,7 @@ function getAll(){
 		},		
 		//esto se hará en caso de que el servicio web falle
 		error:function(res){
-			$('#contenido').html("ERROR "+ res.statusText); 
+			alert("ERROR "+ res.statusText);
 		}
 	});
 }
@@ -51,7 +51,7 @@ function getEstudiante(){
 			$("#contenido2").html(data); 
 		},
 		error:function(res){
-			$("#contenido2").html("ERROR "+ res.statusText);
+			alert("ERROR "+ res.statusText);
 		}
 	});
 }
@@ -75,78 +75,84 @@ function modificarEstudiante(){
 		contentType:"application/json",
 		dataType:"text",
 		//pasamos una cadena a JSON que es lo que nuestro servicio web nos pide
-		data:JSON.stringify( {"tema": tema,"estado": estado, "fechaPresentacion":fecha,"calificacion": calificacion}),
+		data:JSON.stringify( {"tema": tema,"estado": estado,
+			"fechaPresentacion":fecha,"calificacion": calificacion}),
 	    success: function(data){
 	    	var html="Estudiante actualizado";
 	    	$("#contenido3").html(html);
 	    },
 	    error:function(res){
-	    	$("#contenido3").html("ERROR "+ res.statusText);
+	    	alert("ERROR "+ res.statusText);
 	    }
 	});
 }
-function postJSON(){
-	var estudiante = $("#estudiante").val();
-	var estnombre = $("#estnombre").val();
-	var estapellidos = $("#estapellidos").val();
-	var esttema = $("#esttema").val();
-	var esttutores = $("#esttutores").val();
-	var estestado = $("#estestado").val();
-	var estfecha = $("#estfecha").val();
-	var estcalificacion = $("#estcalificacion").val();
+
+/**
+ * Método que permite añadir un nuevo estudiante pasándole 
+ * los datos mediante un formulario html(transformándolo a json)
+ */
+function nuevoEstudianteJSON(){
+	//Nos traemos los datos del formulario
+	var nombre = $("#nombre_nuevo").val();
+	var apellido1 = $("#apellido1_nuevo").val();
+	var apellido2 = $("#apellido2_nuevo").val();	
+	var tema = $("#tema_nuevo").val();
+	var tutor1 = $("#director_nuevo").val();
+    var tutor2 = $("#co-director_nuevo").val();	
+	var estado = $("#estado_nuevo").val();
+	var fecha = $("#fecha_nuevo").val();
+	var calificacion = $("#calificacion_nuevo").val();
 	$.ajax( {
-	type:"POST",
-	url:"http://localhost:8080/WebRestServer//TFG/addEstudiante/"+estudiante,
-	contentType:"application/json",
-	dataType:"json",
-	data:JSON.stringify( {"nombreAlumno":estnombre,"apellidosAlumno":estapellidos,
-	      "temaProyecto": esttema, "listaTutores": esttutores,
-	      "estado": estestado, "fechaPresentacion":estfecha,
-	      "calificacion": estcalificacion}),
-	success:function(data){
-	var newAlumno = "<br>&nbsp&nbsp Alumno: "+data.nombreAlumno+" "+ data.apellidosAlumno+
-    "<br>&nbsp&nbsp Tema: "+ data.temaProyecto+"<br>&nbsp&nbsp Tutores: "+
-    data.listaTutores+"<br>&nbsp&nbsp Estado: "+data.estado+
-    "<br>&nbsp&nbsp Fecha de presentacion: "+data.fechaPresentacion+
-    "<br>&nbsp&nbsp Calificacion: "+data.calificacion+"<br>";
-	$("#Proyecto").html("Date received: "+newAlumno); },
-	error:function(res){
-	alert("ERROR "+ res.statusText); }
+		type:"POST",
+		url:"http://localhost:8080/WebRestServer/TFG/addEstudiante",
+		contentType:"application/json",
+		dataType:"text",
+		//creamos el json que recibe el servicio web
+		data:JSON.stringify( {"nombre": nombre,"apellido1": apellido1,
+			"apellido2": apellido2,"tema":tema, "tutor1": tutor1,
+			"tutor2": tutor2,"estado": estado, "fechaPresentacion":fecha,
+	      "calificacion": calificacion}),
+	    success:function(data){
+	    	var html="Estudiante añadido";
+	    	$('#contenido4').html(html);
+	    },
+	    error:function(res){
+	    	alert("ERROR "+ res.statusText); }
 	});
 }
 
-function postForm(){
-	var estudiante = $("#estudiante").serializeObject();
-	var estnombre = $("#estnombre").val();
-	var estapellidos = $("#estapellidos").val();
-	var esttema = $("#esttema").val();
-	var esttutores = $("#esttutores").val();
-	var estestado = $("#estestado").val();
-	var estfecha = $("#estfecha").val();
-	var estcalificacion = $("#estcalificacion").val();
-	$.ajax( {
-	type:"POST",
-	url:"http://localhost:8080/WebRestServer//TFG/addEstudiante/"+estudiante,
-	contentType:"application/x-www-form-urlencoded; charset=UTF-8",
-	dataType:"json",
-	data:JSON.stringify( {"nombreAlumno":estnombre,"apellidosAlumno":estapellidos,
-	      "temaProyecto": esttema, "listaTutores": esttutores,
-	      "estado": estestado, "fechaPresentacion":estfecha,
-	      "calificacion": estcalificacion}),
-	success:function(data){
-	var newAlumno = "<br>&nbsp&nbsp Alumno: "+data.nombreAlumno+" "+ data.apellidosAlumno+
-    "<br>&nbsp&nbsp Tema: "+ data.temaProyecto+"<br>&nbsp&nbsp Tutores: "+
-    data.listaTutores+"<br>&nbsp&nbsp Estado: "+data.estado+
-    "<br>&nbsp&nbsp Fecha de presentacion: "+data.fechaPresentacion+
-    "<br>&nbsp&nbsp Calificacion: "+data.calificacion+"<br>";
-	$("#Proyecto").html("Date received: "+newAlumno); },
-	error:function(res){
-	alert("ERROR "+ res.statusText); }
+/**
+ * Método que permite añadir un nuevo estudiante pasándole 
+ * los datos mediante un formulario html
+ */
+function nuevoEstudianteJSON(){
+	
+	$("#form").submit(function(e)
+	{
+	    var postData = $(this).serializeArray();
+	    var formURL = $(this).attr("action");
+	    $.ajax(
+	    {
+	        url : "http://localhost:8080/WebRestServer/TFG/addEstudianteForm",
+	        type: "POST",
+	        data : postData,
+	        success:function(data, textStatus, jqXHR) 
+	        {
+	        	var html="Estudiante añadido";
+		    	$('#contenido4').html(html);
+	        },
+	        error: function(jqXHR, textStatus, errorThrown) 
+	        {
+	        	alert("ERROR "+ res.statusText); 
+	        }
+	    });
+	    e.preventDefault(); //STOP default action
+	    e.unbind(); //unbind. to stop multiple form submit.
 	});
+	 
+	$("#form").submit(); //Submit  the FORM
+	
 }
-
-
-
 function deleteJSON(alumno){
 	$.ajax( {
 	type:"DELETE",
@@ -160,3 +166,7 @@ function deleteJSON(alumno){
 	alert("ERROR "+ res.statusText); }
 	});
 }
+
+
+
+

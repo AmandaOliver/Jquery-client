@@ -31,11 +31,39 @@
 				Calificación: <input type='number' id='calificacion'><br><br>
 				<button onClick='modificarEstudiante()'>Modificar los datos</button>
 			</div>
+			<div>
+				<h4>Introduzca los datos del estudiante que desea añadir(transformando el formulario a JSON)</h4>
+				<pre><p id="contenido4"></p></pre>
+				Nombre: <input type='text' id='nombre_nuevo'><br>
+				Primer apellido: <input type='text' id='apellido1_nuevo'><br>
+				Segundo apellido: <input type='text' id='apellido2_nuevo'><br>
+				Tema del TFG: <input type='text' id='tema_nuevo'><br>
+				Director del TFG: <input type='text' id='director_nuevo'><br>
+				Co-director del TFG: <input type='text' id='co-director_nuevo'><br>
+				Estado del TFG: <input type='text' id='estado_nuevo'><br>
+				Fecha de presentación: <input type='date' id='fecha_nuevo'><br>
+				Calificación: <input type='number' id='calificacion_nuevo'><br><br>
+				<button onClick='nuevoEstudianteJSON()'>Añadir el estudiante</button>				
+			</div>
+				<div>
+				<h4>Introduzca los datos del estudiante que desea añadir</h4>
+				<pre><p id="contenido5"></p></pre>
+				<form id="form">
+					Nombre: <input type='text' id='nombre_nuevo'><br>
+					Primer apellido: <input type='text' id='apellido1_nuevo'><br>
+					Segundo apellido: <input type='text' id='apellido2_nuevo'><br>
+					Tema del TFG: <input type='text' id='tema_nuevo'><br>
+					Director del TFG: <input type='text' id='director_nuevo'><br>
+					Co-director del TFG: <input type='text' id='co-director_nuevo'><br>
+					Estado del TFG: <input type='text' id='estado_nuevo'><br>
+					Fecha de presentación: <input type='date' id='fecha_nuevo'><br>
+					Calificación: <input type='number' id='calificacion_nuevo'><br><br>
+					<button type="submit" onClick='nuevoEstudianteFORM()'>Añadir el estudiante</button>		
+				</form>		
+			</div>
 		</section>
 <!--
-<input type="button" value="Update" onclick="updateEstudiante()"/>
-<input type="button" value="POST JSON Estudiante" onclick="postJSON()"/>
-<input type="button" value="POST Form Estudiante" onclick="postForm()"/>
+
 <input type="button" value="DELETE Estudiante" onclick="deleteJSON('SánchezRoldán')"/>
 -->
 </body>
