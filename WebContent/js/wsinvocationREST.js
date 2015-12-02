@@ -136,19 +136,25 @@ function nuevoEstudianteFORM(){
 	var estado = $("#estado").val();
 	var fecha = $("#fecha").val();
 	var calificacion = $("#calificacion").val();
-	$.ajax( {
-		type:"POST",
-		url:"http://localhost:8080/WebRestServer/TFG/addEstudianteForm",
-		contentType:"application/x-www-form-urlencoded",
-		dataType:"text",
-	    success:function(data){
-	    	var html="Estudiante añadido";
-	    	$('#contenido5').html(data);
-	    },
+	$("#idForm").submit(function(e) {
+	    var url = "http://localhost:8080/WebRestServer/TFG/addEstudianteForm"; // the script where you handle the form input.
+
+	    $.ajax({
+	           type: "POST",
+	           url: url,
+	           contentType: 'application/x-www-form-urlencoded',
+	           data: $("#idForm").serialize(), // serializes the form's elements.
+	        
+	           success: function(data)
+	           {
+	               alert(data); // show response from the php script.
+	           },
 	    error:function(res){
-	    	alert("ERROR "+ res.statusText); }
+	    	data.print(); }
+	         });
+
+	    e.preventDefault(); // avoid to execute the actual submit of the form.
 	});
-	
 	
 }
 function borrarEstudiante(alumno){
