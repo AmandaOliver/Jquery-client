@@ -69,6 +69,9 @@ function modificarEstudiante(){
 	var estado = $("#estado_modificar").val();
 	var fecha = $("#fecha_modificar").val();
 	var calificacion = $("#calificacion_modificar").val();
+	if(estado==""){
+		estado="NULL";
+	}
 	$.ajax({
 		type:"PUT",
 		url:"http://localhost:8080/WebRestServer/TFG/update/"+estudiante,
@@ -169,7 +172,7 @@ function borrarEstudiante(alumno){
 		dataType:"json",
 		success:function(data){
 			var html="Estudiante borrado";
-			$("#contenido6").html(data);
+			$("#contenido6").html(html);
 		},
 		error:function(res){
 			alert("ERROR "+ res.statusText); 
